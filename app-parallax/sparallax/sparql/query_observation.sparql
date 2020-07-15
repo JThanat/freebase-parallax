@@ -1,0 +1,104 @@
+Select distinct count(distinct ?id_inst) as ?id_inst_count ?id  ?id_name  where {  
+    ?id_inst  rdf:type  ?id.
+    {
+        Select  ?id ?id_name  ?id  where {  
+            ?id  rdfs:label  ?id_name .  ?id  rdf:type  owl:Class. 
+            FILTER langMatches(lang(?id_name),"EN").
+        }
+    }
+} order by   ?id_name  ?id
+
+Select distinct count(distinct ?id_inst) as ?id_inst_count ?id  where {  
+    <http://dbpedia.org/resource/President_of_the_United_States>  rdf:type  ?id.  
+    ?id  rdf:type  owl:Class.
+} order by  ?id
+
+
+Select distinct count(distinct ?id) as ?id_count  where {  
+    ?id  rdf:type    <http://dbpedia.org/ontology/Person>.  
+    ?id  rdfs:label  ?id_name.
+    ?id_name bif:contains '"President of the United States"' .
+}
+
+
+# Type President
+# First Query
+# {
+#   /freebase/type_profile/instance_count: null
+#   /type/type/instance: Array(1)
+#   0: {count: null}
+#   id: null
+#   name: null
+#   name~=: "*president*"
+#   type: "/type/type"
+# }
+Select distinct count(distinct ?id_inst) as ?id_inst_count ?id  ?id_name  where {  
+    ?id_inst  rdf:type  ?id.  ?id  rdfs:label  ?id_name .
+    ?id  rdf:type  owl:Class.
+    ?id_name bif:contains '"president"'.
+} order by   ?id_name  ?id
+
+# Second Query
+# {
+#   /type/type/instance: Array(1)
+#   0: {name~=: "*president*", return: "count"}
+#   id: null
+#   name: null
+#   type: "/type/type"  
+# }
+Select distinct count(distinct ?id_inst) as ?id_inst_count ?id  ?id_name  where {  
+    ?id_inst  rdf:type  ?id.
+    ?id_inst  rdfs:label  ?id_inst_name.
+    ?id  rdfs:label  ?id_name .
+    ?id  rdf:type  owl:Class.
+    ?id_inst_name bif:contains '"president"'.
+    # FILTER(langMatches(lang(?id_name), "en")) .
+    # FILTER(langMatches(lang(?id_inst_name), "en")) .
+} order by   ?id_name  ?id
+
+# Third Query
+# {
+#    search: "president"
+# }
+Select distinct ?id ?name ?id_type ?id_type_name  where {  
+    optional { ?id   rdf:type   ?id_type .
+       ?id_type   rdfs:label   ?id_type_name 
+    } .
+    {
+        select ?id ?name where {
+            ?id rdfs:label ?name .
+             ?name bif:contains '"president"' option(score ?scr)
+        } order by desc(?scr) limit 3
+    }
+}
+
+Select distinct  ?description ?name ?image  where {   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   <http://dbpedia.org/property/abstract>  ?description.   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   rdfs:label  ?name.  
+    optional { 
+        <http://dbpedia.org/resource/A._N._R._Robinson>   <http://xmlns.com/foaf/0.1/img>  ?image 
+    }.
+}
+# |
+# |
+# |
+# V
+Select distinct  ?description ?name ?image  where {   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   <http://dbpedia.org/ontology/abstract>  ?description.   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   rdfs:label  ?name.  
+    optional { 
+        <http://dbpedia.org/resource/A._N._R._Robinson>   <http://xmlns.com/foaf/0.1/img>  ?image 
+    }.
+    FILTER(langMatches(lang(?description), "en")) .
+    FILTER(langMatches(lang(?name), "en")) .
+}
+
+
+# Error
+Select distinct  ?description ?name ?image  where {   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   <http://dbpedia.org/ontology/abstract>  ?description.   
+    <http://dbpedia.org/resource/A._N._R._Robinson>   rdfs:label  ?name.  
+    optional { <http://dbpedia.org/resource/A._N._R._Robinson>   <http://dbpedia.org/ontology/thumbnail>  ?image }.
+    FILTER(langMatches(lang(?description), "en")) ,FILTER(langMatches(lang(?name), "en")) 
+    FILTER(langMatches(lang(?description), "en")) ,FILTER(langMatches(lang(?name), "en")) 
+}

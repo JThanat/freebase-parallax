@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/6/app/tags/release-200808
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/6/app/tags/release-200808/.project
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/6/app/tags/release-200808/build.xml
+END
+license.txt
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/6/app/tags/release-200808/license.txt
+END

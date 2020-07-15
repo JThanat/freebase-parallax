@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/25/app/tags/release-20081105/src/scripts/views/map-view
+END
+map-view-markers.js
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/25/app/tags/release-20081105/src/scripts/views/map-view/map-view-markers.js
+END
+map-view-plotting.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/25/app/tags/release-20081105/src/scripts/views/map-view/map-view-plotting.js
+END
+map-view.js
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/25/app/tags/release-20081105/src/scripts/views/map-view/map-view.js
+END
+map-view-querying.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/25/app/tags/release-20081105/src/scripts/views/map-view/map-view-querying.js
+END

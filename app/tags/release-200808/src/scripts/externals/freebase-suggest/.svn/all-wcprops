@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/6/app/tags/release-200808/src/scripts/externals/freebase-suggest
+END
+freebase.select.js
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/6/app/tags/release-200808/src/scripts/externals/freebase-suggest/freebase.select.js
+END
+freebase.suggest.js
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/6/app/tags/release-200808/src/scripts/externals/freebase-suggest/freebase.suggest.js
+END
+freebase.controls.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/6/app/tags/release-200808/src/scripts/externals/freebase-suggest/freebase.controls.js
+END

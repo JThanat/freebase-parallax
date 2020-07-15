@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!-- <endpoint>http://virtuoso.deri.ie/sparql</endpoint> -->
+<endpoint>sparql</endpoint>
+<dataset>dbpedia</dataset>
+<graph>http://dbpedia.org</graph>
+<labelprop>rdfs:label</labelprop>
+<typeprop>rdf:type</typeprop>
+<!-- <classtype>rdfs:Class</classtype> -->
+<classtype>owl:Class</classtype>
+<result>o.results.bindings[i]</result>
+<!-- <abstractprop>&lt;http://dbpedia.org/propperty/abstract&gt;</abstractprop> -->
+<abstractprop>&lt;http://dbpedia.org/ontology/abstract&gt;</abstractprop>
+<!-- <imageprop>&lt;http://xmlns.com/foaf/0.1/img&gt;</imageprop> -->
+<imageprop>&lt;http://dbpedia.org/ontology/thumbnail&gt;</imageprop>
+</configuration>
