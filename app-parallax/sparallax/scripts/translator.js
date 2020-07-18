@@ -13,6 +13,7 @@
 */
 var translator = {};
 var translatorLog = []
+var queryList = []
 
 translator.translatequery = function (query, onDone5) {
 	// console.log("query")
@@ -564,7 +565,9 @@ translator.translatequery = function (query, onDone5) {
 
 
 		}
-
+        if(id.includes("/")) {
+			id = id.replace("/", "")
+		}
 		startofstatements = "var " + id + "=0;" + startofstatements;
 		var objectstruct = new objectelement();
 		objectstruct.whereclause.union = new objectelement();
@@ -686,7 +689,14 @@ translator.translatequery = function (query, onDone5) {
 	}
 	for (var i in globalquery.selectclause) {
 		if(globalquery.selectclause[i].includes("_name")) {
-			finalquery += " FILTER langMatches(lang("+globalquery.selectclause[i]+"),\"en\")."
+			if(globalquery.selectclause[i].split(" ").length > 1) {
+				const selectList = globalquery.selectclause[i].split(" ")
+				for(var j in selectList) {
+					if(selectList[j].includes("_name")) finalquery += " FILTER langMatches(lang("+selectList[j]+"),\"en\").";
+				}
+			} else {
+				finalquery += " FILTER langMatches(lang("+globalquery.selectclause[i]+"),\"en\")."
+			}
 		}
 	}
 
@@ -702,7 +712,6 @@ translator.translatequery = function (query, onDone5) {
 
 	var funcID = new Date().getTime() + "x" + Math.floor(Math.random() * 1000);
 	var funcname = "fn" + funcID;
-
 	window[funcname] = new Function("o,onDone2", statements);
 	logQuery['final'] = finalquery
 	console.log(finalquery)

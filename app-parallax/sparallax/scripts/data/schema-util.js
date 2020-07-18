@@ -107,6 +107,8 @@ SchemaUtil._getSchemas = function(typeIDs, onDone) {
             "id|=" :     typeIDs
         }
     ];
+    // console.log("_getSchemas: query")
+    // console.log(query)
     JsonpQueue.queryOne(query, function(o) { SchemaUtil._gotSchemas(o, onDone); }, function(s) { log(s); onDone(); });
 };
 
@@ -145,7 +147,7 @@ SchemaUtil._gotSchemas = function(o, onDone) {
                     typeRecord.filterSuggestions = typeProfile["/user/dfhuynh/parallax/type_profile/filter_suggestion"];
                 }
             }
-            console.log(typeRecord);
+            // console.log(typeRecord);
         }
         var properties = entry["/type/type/properties"];
         SchemaUtil._processPropertySchemas(properties, typeRecord, moreTypesToFetch);
