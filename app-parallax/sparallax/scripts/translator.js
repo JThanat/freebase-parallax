@@ -15,7 +15,8 @@ var translator = {};
 var translatorLog = []
 
 translator.translatequery = function (query, onDone5) {
-
+	// console.log("query")
+	// console.log(query)
 	var startofstatements = "var id_ace=0;var flag =0;var modified={};modified.code= \"/api/status/ok\"; 		modified.q1={};modified.q1.code=\"/api/status/ok\";modified.q1.result=[];try{for(var i = 0; i<o.results.bindings.length;i++){if(typeof(modified.q1.result[id])==\"undefined\")modified.q1.result[id]={};";
 	var statements = "";
 	var endofstatements = "if(flag==0) id++;flag=0;}}catch(e){}onDone2(modified);";
@@ -206,7 +207,7 @@ translator.translatequery = function (query, onDone5) {
 					textsearchstmt += " '\"" + queryobject["name~="].substring(0, queryobject["name~="].length - 1) + "\"' .";
 			//objectstruct.whereclause.o.push("'\""+queryobject["name~="].substring(0,queryobject["name~="].length-1) +"\"'");
 			// objectstruct.whereclause.filter.push(" FILTER regex("+id+"_name,\""+queryobject["name~="].substring(1,queryobject["name~="].length-1)+"\",\"i\").");
-			objectstruct.whereclause.filter.push(" FILTER langMatches(lang("+id+"_name),\"en\")."); // this make this slower
+			// objectstruct.whereclause.filter.push(" FILTER langMatches(lang("+id+"_name),\"en\")."); // this make this slower
 			objectstruct.whereclause.textsearch.push(textsearchstmt);
 		}
 	};
@@ -246,6 +247,7 @@ translator.translatequery = function (query, onDone5) {
 	}
 
 	var addobjecttoquery = function (objectstruct) {
+		// console.log(objectstruct.whereclause.filter.length);
 		if (objectstruct.whereclause.filter.length != 0) {
 			var subquery = "Select ";
 			/*for(var i in objectstruct.selectclause)
@@ -682,6 +684,13 @@ translator.translatequery = function (query, onDone5) {
 	for (var i in globalquery.whereclause.subquery) {
 		finalquery += "{" + globalquery.whereclause.subquery[i] + "}";
 	}
+	for (var i in globalquery.selectclause) {
+		if(globalquery.selectclause[i].includes("_name")) {
+			finalquery += " FILTER langMatches(lang("+globalquery.selectclause[i]+"),\"en\")."
+		}
+	}
+
+	// filter lang
 	finalquery += "}"; //or any extra clause
 	if (globalquery.modifierclause.orderby.length != 0)
 		finalquery += " order by "
@@ -696,6 +705,7 @@ translator.translatequery = function (query, onDone5) {
 
 	window[funcname] = new Function("o,onDone2", statements);
 	logQuery['final'] = finalquery
+	console.log(finalquery)
 	translatorLog.push(logQuery)
 	onDone5(funcname, finalquery);
 };
